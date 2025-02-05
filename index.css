@@ -1,17 +1,30 @@
 body {
   margin: 0;
   background-color: black;
+  color: white;
+}
+p {
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.3rem;
+  margin: 0;
+  text-align: center;
 }
 
 #dots-container {
-  padding: 8px;
+  padding: 12px;
   align-content: center;
   justify-content: center;
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  height: 100vh;
-  /* overflow: hidden; */
+  height: calc(100vh - 90px);
+}
+#details-container {
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .dot {

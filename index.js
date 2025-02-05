@@ -3,17 +3,23 @@
 document.addEventListener("DOMContentLoaded", () => {
   // create container and give it the same dimensions as the client's
   const container = document.getElementById("dots-container");
-  const containerWidth = container.clientWidth - 12;
-  const containerHeight = container.clientHeight - 12;
+  const containerStyle = getComputedStyle(container);
+  const padding = parseInt(containerStyle.padding) * 2; // Total padding (left + right or top + bottom)
+  const containerWidth = container.clientWidth - padding;
+  const containerHeight = container.clientHeight - padding;
 
   // number of dots should be as much as the container allows
   const dotsHorizontally = Math.floor(containerWidth / 10);
   const dotsVertically = Math.floor(containerHeight / 10);
   const totalDots = dotsHorizontally * dotsVertically;
 
-  // birthdate, death date, todays date
+  // dates and formatting
   const birthDate = new Date("1996-01-12");
-  const deathDate = new Date("2071-01-11");
+  const [year, month, day] = birthDate.toISOString().split("T")[0].split("-");
+  const formattedDate = `${day}-${month}-${year}`; // Format: MM-DD-YYYY
+  const birthYear = birthDate.getFullYear();
+  const lifeExpectation = 75;
+  const deathDate = new Date(`${birthYear + lifeExpectation}-01-11`);
   const today = new Date();
 
   // calculate difference between birth & death in days (total life)
@@ -56,10 +62,18 @@ document.addEventListener("DOMContentLoaded", () => {
     dot.className = "dot";
     container.appendChild(dot);
   }
+
   let allDots = document.querySelectorAll(".dot");
   let allDotsArray = Array.from(allDots);
   let selectedDots = allDotsArray.slice(0, completedDots);
   selectedDots.forEach((dot) => {
     dot.classList.add("full");
   });
+
+  const percentageEl = document.getElementById("remaining");
+  percentageEl.innerText = `You have ${percentageRemaining}% of life remaining,`;
+  const expectationEl = document.getElementById("expectation");
+  expectationEl.innerText = `if you were to live ${lifeExpectation} years`;
+  const birthDateEl = document.getElementById("birth-date");
+  birthDateEl.innerText = `and born on ${formattedDate}.`;
 });
