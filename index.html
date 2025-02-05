@@ -4,15 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="index.css" rel="stylesheet" />
-    <script src="index.js"></script>
+    <script src="onload.js"></script>
+    <script defer src="change.js"></script>
     <title>Life Progress Bar</title>
   </head>
   <body>
     <div id="dots-container"></div>
     <div id="details-container">
-      <p id="remaining">You have [percentage] of life remaining</p>
-      <p id="expectation">...if you were to live [years] years</p>
-      <p id="birth-date">...and born on [birthdate]</p>
+      <p>You have <span id="remaining">..</span>% of life remaining,</p>
+      <p>
+        if you were to live <span class="visible" id="expectation">...</span
+        ><label for="expectancy" class="sr-only">Life expectancy:</label>
+        <input
+          class="invisible"
+          type="number"
+          id="expectancy"
+          name="expectancy"
+          min="1"
+          max="1000"
+          step="1"
+        />
+        years
+      </p>
+      <p>
+        and born on <span class="visible" id="birth-date">....</span
+        ><label for="birthDate" class="sr-only">Birth date:</label>
+        <input class="invisible" type="date" id="birthDate" name="birthDate" />
+      </p>
+      <div id="btn-container">
+        <button id="btn-change" class="visible">Change your details</button>
+        <button id="btn-save" class="invisible">Save details</button>
+        <button id="btn-cancel" class="invisible">Cancel</button>
+      </div>
     </div>
   </body>
 </html>

@@ -13,12 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const dotsVertically = Math.floor(containerHeight / 10);
   const totalDots = dotsHorizontally * dotsVertically;
 
+  const lifeDetails = localStorage.getItem("lifeDetails");
+  const parsedDetails = JSON.parse(lifeDetails);
+
   // dates and formatting
-  const birthDate = new Date("1996-01-12");
+  const birthDate = new Date(parsedDetails.birthdateData);
   const [year, month, day] = birthDate.toISOString().split("T")[0].split("-");
   const formattedDate = `${day}-${month}-${year}`; // Format: MM-DD-YYYY
   const birthYear = birthDate.getFullYear();
-  const lifeExpectation = 75;
+  const lifeExpectation = parseInt(parsedDetails.expectancyData);
   const deathDate = new Date(`${birthYear + lifeExpectation}-01-11`);
   const today = new Date();
 
@@ -71,9 +74,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const percentageEl = document.getElementById("remaining");
-  percentageEl.innerText = `You have ${percentageRemaining}% of life remaining,`;
+  percentageEl.innerText = percentageRemaining;
   const expectationEl = document.getElementById("expectation");
-  expectationEl.innerText = `if you were to live ${lifeExpectation} years`;
+  expectationEl.innerText = lifeExpectation;
   const birthDateEl = document.getElementById("birth-date");
-  birthDateEl.innerText = `and born on ${formattedDate}.`;
+  birthDateEl.innerText = formattedDate;
 });
