@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const defaultFormatDate = `${year}-${month}-${day}`; // Format: YYYY-MM--DD
   // calculate the death date based on the birth year and life expectation
   const birthYear = birthDate.getFullYear();
-  const lifeExpectation = parseInt(parsedDetails.expectancyData);
-  const deathDate = new Date(`${birthYear + lifeExpectation}-01-11`);
+  const lifeExpectancy = parseInt(parsedDetails.expectancyData);
+  const deathDate = new Date(`${birthYear + lifeExpectancy}-01-11`);
   const today = new Date();
 
   // calculate difference between birth & death in days (total life)
@@ -40,12 +40,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const completedTimeDifference = Math.abs(
     today.getTime() - birthDate.getTime()
   );
-  const completedTimeDays = Math.ceil(
+  const completedLifeDays = Math.ceil(
     completedTimeDifference / (1000 * 3600 * 24)
   );
   //calculate the percentage of completed life
   const percentageCompleted = Math.floor(
-    (completedTimeDays / totalLifeDays) * 100
+    (completedLifeDays / totalLifeDays) * 100
   );
   //calculate the percentage of remaining life
   const percentageRemaining = 100 - percentageCompleted;
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `The number of days between ${birthDate.toDateString()} and ${deathDate.toDateString()} is ${totalLifeDays} days.`
   );
   console.log(
-    `The number of days between ${birthDate.toDateString()} and ${today.toDateString()} is ${completedTimeDays} days.`
+    `The number of days between ${birthDate.toDateString()} and ${today.toDateString()} is ${completedLifeDays} days.`
   );
   console.log(`Life ${percentageRemaining}% remaining`);
   console.log(`The current number of dots on the screen are ${totalDots}`);
@@ -84,12 +84,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // display remaining life percentage in text
   document.getElementById("remaining").innerText = percentageRemaining;
   // display life expectancy in years in text
-  document.getElementById("expectation").innerText = lifeExpectation;
+  document.getElementById("expectation").innerText = lifeExpectancy;
   // display birth date as text
   document.getElementById("birth-date").innerText = formattedDate;
 
   // display life expectancy as value in the form field
-  document.getElementById("expectancy").value = lifeExpectation;
+  document.getElementById("expectancy").value = lifeExpectancy;
   // display birth date as value in the form field
   document.getElementById("birthDate").value = defaultFormatDate;
 });
